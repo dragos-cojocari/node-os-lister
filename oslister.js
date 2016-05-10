@@ -76,7 +76,7 @@ walk( process.argv[2], 0, process.argv[3] || 3, [], function(err, results) {
 	throw err;
 
 	results.sort( function( a,b) {
-		return a.name.localeCompare( b.name);
+		return a.name ? a.name.localeCompare( b.name) : -1;
 	});
 	
 	console.log( "Name,Version,Date,License,Repository");
