@@ -2,8 +2,8 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 
 // constants
-var iot4i = ['action-engine', 'shield-engine', 'historian-storage', 'insurance-dashboard', 'iot4x-api', 'iot-visualization','wearables-framework'];
-var ibmmodules = [ 'ibmiotf', 'wearables-framework'];
+var excludedModules = ['action-engine', 'shield-engine', 'historian-storage', 'insurance-dashboard', 'iot4x-api', 'iot-visualization','wearables-framework'];
+var excludedDependencies = [ 'ibmiotf', 'wearables-framework'];
 var registry = require('npm-stats')()
 
 function endsWith(str, suffix) {
@@ -30,8 +30,8 @@ function processPackage( file, results) {
 		license = pkg.licenses[0].type;
 	}
 				
-	if ( iot4i.indexOf( pkg.name) >= 0) {
-		// skip ibm
+	if ( excludedModules.indexOf( pkg.name) >= 0) {
+		// skip modules from the excluded list
 	}
 	else {
 		results.push(  { 'name': pkg.name, 'version': pkg.version, 'license': license, 'repo': repo });
@@ -53,7 +53,7 @@ var walk = function(dir, level, maxLevel, results, done) {
 		file = dir + '/' + file;
 		
 		stat = fs.statSync(file);
-		if (stat && stat.isDirectory() && ibmmodules.indexOf( fileName) < 0) {
+		if (stat && stat.isDirectory() && excludedDependencies.indexOf( fileName) < 0) {
 			if ( level < maxLevel) {
 				walk(file, level + 1, maxLevel, results, done);
 			}
