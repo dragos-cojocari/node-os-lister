@@ -71,7 +71,7 @@ var walk = function(dir, level, maxLevel, results, done) {
 	}
 }
 
-walk( process.argv[2], 0, process.argv[3] || 2, [], function(err, results) {
+walk( process.argv[2], 0, process.argv[3] || 3, [], function(err, results) {
   if (err) 
 	throw err;
 
