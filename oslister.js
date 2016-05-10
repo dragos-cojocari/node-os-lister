@@ -1,10 +1,10 @@
 var exec = require('child_process').exec;
 var fs = require('fs');
+var registry = require('npm-stats')()
 
 // constants
-var excludedModules = ['action-engine', 'shield-engine', 'historian-storage', 'insurance-dashboard', 'iot4x-api', 'iot-visualization','wearables-framework'];
-var excludedDependencies = [ 'ibmiotf', 'wearables-framework'];
-var registry = require('npm-stats')()
+var excludedModules = [];
+var excludedDependencies = [ ];
 
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
